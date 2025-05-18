@@ -12,7 +12,6 @@ mongoose.connect(`${process.env.connectionstr}`)
 
 app.use(express.json());
 
-
 const allowedOrigins = [
   'http://localhost:5173'
 ];
