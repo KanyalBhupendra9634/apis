@@ -13,7 +13,7 @@ mongoose.connect(`${process.env.connectionstr}`)
 app.use(express.json());
 
 const allowedOrigins = [
-  'http://localhost:5173'
+  'https://taskui-lemon.vercel.app'
 ];
 if (process.env.NODE_ENV !== 'production') {
   allowedOrigins.push('http://localhost:5173');
