@@ -13,7 +13,7 @@ mongoose.connect(`${process.env.connectionstr}`)
 app.use(express.json());
 
 const allowedOrigins = [
-  'https://taskui-lemon.vercel.app'
+  'https://taskui-lemon.vercel.app', 'https://taskui-8ufj7k2tw-bhupendra-kanyals-projects.vercel.app'
 ];
 if (process.env.NODE_ENV !== 'production') {
   allowedOrigins.push('http://localhost:5173');
