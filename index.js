@@ -34,13 +34,12 @@ app.use(cors({
 }));
 
 
-app.get('/',(req,res)=>{
-   res.status(200).json({message:"Backend got connected!!!"})
-})
 app.use('/v1'(req, res, next) => {
     exploredRouter(req,res,next)
 })
-
+app.get('/',(req,res)=>{
+   res.status(200).json({message:"Backend got connected!!!"})
+})
 
 app.listen(process.env.PORT || 9000, () => {
   console.log(`Server is running on port ${process.env.PORT || 9000}`);
