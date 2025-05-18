@@ -34,10 +34,7 @@ app.use(cors({
 }));
 
 
-app.use('/v1'(req, res, next) => {
-    exploredRouter(req,res,next)
-})
-app.get('/',(req,res)=>{
+app.get((req,res)=>{
    res.status(200).json({message:"Backend got connected!!!"})
 })
 
