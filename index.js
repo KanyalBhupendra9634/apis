@@ -17,7 +17,7 @@ const allowedOrigins = [
   'http://localhost:5173'
 ];
 if (process.env.NODE_ENV !== 'production') {
-  allowedOrigins.push('https://taskui-three.vercel.app');
+  allowedOrigins.push('*');
 }
 
 app.use(cors({
