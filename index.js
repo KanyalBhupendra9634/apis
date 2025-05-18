@@ -14,7 +14,7 @@ app.use(express.json());
 
 
 const allowedOrigins = [
-  '*'
+  'http://localhost:5173'
 ];
 if (process.env.NODE_ENV !== 'production') {
   allowedOrigins.push('http://localhost:5173');
