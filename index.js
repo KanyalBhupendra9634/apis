@@ -1,24 +1,37 @@
-// app.js
 const express = require('express');
-const {mongoose} =require('mongoose')
-const exploredRouter = require('./router/elxploredData.router.js')
+const mongoose = require('mongoose'); 
+const exploredRouter = require('./router/elxploredData.router.js');
+require("dotenv").config();
 const app = express();
-const PORT = 3000;
+const cors = require('cors')
 
-// Connect to MongoDB
-mongoose.connect("mongodb+srv://kanyalgboby:x2eRclBoq6JJ9Vri@cluster0.wwhg0qt.mongodb.net/taskDb?retryWrites=true&w=majority&appName=Cluster0", {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+mongoose.connect(`${process.env.connectionstr}`)
+  .then(() => console.log('Connected to MongoDB'))
+  .catch((err) => console.error('MongoDB connection error:', err));
+
 
 app.use(express.json());
 
-app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-    next();
-  });
+
+const allowedOrigins = [
+  '*'
+];
+if (process.env.NODE_ENV !== 'production') {
+  allowedOrigins.push('http://localhost:5173');
+}
+
+app.use(cors({
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error(`Origin ${origin} not allowed by CORS`));
+    }
+  },
+  methods: ['GET', 'POST', 'OPTIONS'],
+  allowedHeaders: ['Content-Type'],
+  credentials: false
+}));
 
 
 
@@ -26,6 +39,7 @@ app.use((req, res, next) => {
     exploredRouter(req,res,next)
 })
 
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+
+app.listen(process.env.PORT || 9000, () => {
+  console.log(`Server is running on port ${process.env.PORT || 9000}`);
 });
